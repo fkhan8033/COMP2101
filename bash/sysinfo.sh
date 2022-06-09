@@ -1,19 +1,41 @@
 #!/bin/bash
-# This script displays the System info
+# This script displays the System Report (Improved Version for LAB2)
 
-# Hostname
-echo hostname: $(hostname -f)
+# Adding empty line
+echo " "
 
-# Displaying DNS server
-echo $(resolvectl | grep -w ns1.20046731567315.mytld)
+# Title for script
+echo Report for $(hostname -f)
+
+# Empty line
+echo " "
+
+# Seperator line
+echo "======================"
+
+# Empty line
+echo " "
+
+# Fully Qualified Domain Name
+echo FQDN: $(hostname --fqdn)
 
 # OS Name, version & Distro info
-echo OS name: $(uname -o)
-echo OS version: $(uname -r)
-echo $(hostnamectl | grep -w Operating)
+echo OS name and version:  $(uname -o) $(uname -r)
 
-# For viewing IP addresses that are not on the 127 network and filtering them
-echo IP addresses: $(ip a s ens33 | grep -w inet |awk '{print $2}')
+# For viewing IP address with filtered output 
+echo IP address: $(ip a s ens33 | grep -w 192.168.0.99 |awk '{print $2}')
 
 # Amount of space available, filtered by the root file and displayed as a human-friendly mumber
-echo Root Filesystem disk space: \ $(df -h | sed '2d;3d;4d;5d;7d;$d')
+echo Root Filesystem free space: \ $(df -h | sed '2d;3d;4d;5d;7d;$d' | awk '{print $4}')
+
+# Empty line
+echo " "
+
+# Seperator line
+echo "======================"
+
+# Empty line
+echo " "
+
+echo 'LAB done :)'
+echo " "
